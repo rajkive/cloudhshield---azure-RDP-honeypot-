@@ -1,0 +1,43 @@
+# T1110 — Brute Force: High-Volume Failed Logons from Single IP
+
+## Summary
+
+Detects automated brute force against exposed authentication services by flagging any single public source IP that generates 5+ failed logon events within a 1-hour window.
+
+| Attribute | Value |
+|-----------|-------|
+| MITRE ATT&CK | [T1110 — Brute Force](https://attack.mitre.org/techniques/T1110/) |
+| Severity | Medium |
+| Platform | Windows |
+| Source log | SecurityEvent (Event ID 4625) |
+| Sigma rule | [rule.yml](rule.yml) |
+| KQL rule | [rule.kql](rule.kql) |
+| Status | Deployed in Sentinel |
+
+## Detection logic
+
+Rolling 1-hour window per source IP, counting failed logon events. IPs matching:
+
+- EventID 4625 (failed logon), AND
+- Public IP (excludes `10.0.0.0/8`, `192.168.0.0/16`, and empty/dash values), AND
+- 5 or more failed attempts in a 1-hour window
+
+
+## Entity mapping
+
+The rule maps the `IpAddress` field to a Sentinel `IP` entity with the `Address` identifier. This enables:
+
+- Automatic enrichment of alerts with Threat Intelligence Indicators
+- Automatic correlation with other alerts involving the same IP
+- SOAR playbook input (e.g., auto-block at firewall via Sentinel automation rule)
+
+## MITRE ATT&CK mapping
+
+- **Tactic:** Credential Access (TA0006)
+- **Technique:** Brute Force (T1110)
+- **Sub-techniques that could also trigger this rule:** T1110.001 (Password Guessing)
+
+
+## False positives
+
+On production Windows servers, users who forget their password and repeatedly mistype it could trigger this. On an exposed honeypot with no legitimate users, false-positive rate is effectively zero so every alert is a real attacker.

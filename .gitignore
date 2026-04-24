@@ -1,0 +1,30 @@
+# Secrets
+.env
+*.pem
+*.key
+credentials.json
+secrets/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# OS cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+
+# Local data exports
+exports/
+*.csv
+*.json.gz
+
+# Azure CLI
+.azure/
