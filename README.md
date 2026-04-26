@@ -5,7 +5,7 @@ An internet-exposed Azure honeypot for capturing real-world attacker telemetry, 
 *Note: Some parts of this were inspired by Josh Madakor's project but I have tried to add a very detailed breakdown of how I approached this project and made some changes along the way.*
 
 ![Sentinel Workbook](screenshots/dashboard.png)
-![Overview](screenshots/telemetry.png)
+![Overview](screenshots/sentine-.png)
 
 ---
 
@@ -141,9 +141,9 @@ SecurityEvent
 
 
 **Current telemetry:**
-- Failed authentication events (4625): **[58]**
-- Unique source IPs: **[5]**
-- Countries of origin: **[4]**
+- Failed authentication events (4625): **[828]**
+- Unique source IPs: **[20]**
+- Countries of origin: **[9]**
 - Most-attempted usernames: `administrator`, `test`, `web-srv-02`
 
 [Dashboard Analysis](screenshots/sentine-.png) |
